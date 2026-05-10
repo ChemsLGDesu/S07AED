@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class MyQueue<T>
 {
-    #region Variables y Nodos
+    #region Variables
     private QueueNode<T> head;
     private QueueNode<T> tail;
     private int count;
     #endregion
-    // -> 0(1)
-    #region Enqueue, Dequeue , Peek y Clear
+
+    #region Methods Enqueue, Dequeue, Peek y Clear
     public void Enqueue(T value)
     {
         QueueNode<T> newNode = new(value);
@@ -34,31 +34,33 @@ public class MyQueue<T>
             throw new System.Exception("Queue Empty");
         }
 
+
+
         T value = head.Value;
         head = head.Next;
 
         count--;
         return value;
+
+
     }
 
     public T Peek()
     {
-        if(head == null)
-            throw new System.Exception("Queue Empty");
-        T value = head.Value;
+        if (head == null)
+            throw new System.Exception("Empy");
+
         return head.Value;
     }
+    #endregion
 
+    #region Clear
     public void Clear()
     {
-        head = null; 
-        tail = null; 
+        head = null;
+        tail = null;
         count = 0;
     }
-    #endregion
-
-    #region Getters
     public int Count => count;
     #endregion
-
 }

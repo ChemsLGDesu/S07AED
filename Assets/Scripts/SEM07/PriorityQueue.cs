@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PriorityQueue<T>
@@ -15,8 +16,6 @@ public class PriorityQueue<T>
     {
         hasHigherPriority = rule;
     }
-
-
 
     #region Public Methods
     //-> O(1)
@@ -56,6 +55,22 @@ public class PriorityQueue<T>
         tail = newNode;*/
     }
 
+    public void Comparation(Func<T, T, bool> newRule)
+    {
+        hasHigherPriority = newRule;
+        Rebuild();
+    }
+
+    private void Rebuild()
+    {
+        var elements = ToList();
+        Clear();
+
+        foreach (var e in elements)
+        {
+            Enqueue(e);
+        }
+    }
     public T Dequeue()
     {
         if (head == null)
@@ -81,6 +96,19 @@ public class PriorityQueue<T>
 
 
         return head.Value;
+    }
+    public List<T> ToList()
+    {
+        var list = new List<T>();
+        var current = head;
+
+        while (current != null)
+        {
+            list.Add(current.Value);
+            current = current.Next;
+        }
+
+        return list;
     }
     public void Clear()
     {

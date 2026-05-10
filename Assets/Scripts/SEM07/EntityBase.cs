@@ -2,18 +2,14 @@ using UnityEngine;
 
 public class EntityBase : MonoBehaviour
 {
-    public BaseStats stats;
     public string entityName;
-    public float id;
-    public float speed;
+    public BaseStats stats;
 
-    private void Awake()
+    public int ID => stats.id;
+    public float Speed => stats.speed;
+
+    public override string ToString()
     {
-        if (stats != null)
-        {
-            entityName = stats.name;
-            id = stats.id;
-            speed = stats.speed;
-        }
+        return entityName + " ID " + ID + " Speed " + Speed;
     }
 }
